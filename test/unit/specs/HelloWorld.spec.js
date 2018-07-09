@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import HelloWorld2 from '@/components/HelloWorld2'
+import main from '@/components/main'
 
-describe('HelloWorld2.vue', () => {
+describe('main.vue', () => {
   it('should render correct contents', () => {
-    const Constructor = Vue.extend(HelloWorld2)
+    const Constructor = Vue.extend(main)
     const vm = new Constructor().$mount()
     expect(vm.$el.querySelector('.hello h1').textContent)
       .toEqual('Welcome to Your Vue.js App')

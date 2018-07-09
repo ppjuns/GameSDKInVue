@@ -1,21 +1,40 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld2 from '@/components/HelloWorld2'
-import login from '@/components/login'
+import GameList from '@/pages/GameList'
+import Login from '@/pages/LoginPage'
+import Home from '@/components/common/MainBody'
+import NotFound from '@/pages/NotFound'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path:'/home',
+      name:'home',
+      component:Home,
+      children:[
+        {
+          path: '/game',
+          name: 'game',
+          component: GameList
+        }
+      ]
+    },
+    {
+      path: '/login',
       name: 'login',
-      component: login
+      component: Login
+    },
+    {
+      path: '/404',
+      name: 'NotFound',
+      component: NotFound
     },
     {
       path: '/',
-      name: 'HelloWorld2',
-      component: HelloWorld2
-    }
+      redirect: '/login'
+  },
+    
   ]
 })

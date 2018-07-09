@@ -17,7 +17,7 @@
     "axios": "^0.18.0",
     "element-ui": "^2.4.2",
     "vue": "^2.5.2",
-    "vue-axios": "^2.1.1",
+    "vue-axios": "^2.1.2",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"
   },
