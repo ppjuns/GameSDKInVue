@@ -8,7 +8,7 @@
       <p class="login-text">密码：</p>
       <el-input prefix-icon="el-icon-view" placeholder="请输入密码" type="password" v-model="inputPwd" clearable>
       </el-input>
-      <el-button type="primary" class="login-btn" v-on:click="login" :loading="isLoading">登录</el-button>
+      <el-button type="primary" class="login-btn" @click="login" :loading="isLoading">登录</el-button>
     </div>
   </div>
 </template>

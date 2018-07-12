@@ -1,24 +1,24 @@
 <template>
   <el-aside class="main-side" width="200px" height="100%">
-      <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="false" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-        <el-menu-item index="1">
-          <i class="el-icon-location"></i>
-          <span slot="title" class="main-title">游戏管理</span>
-        </el-menu-item>
-        <el-menu-item index="2">
-          <i class="el-icon-document"></i>
-          <span slot="title" class="main-title">用户管理</span>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-setting"></i>
-          <span slot="title" class="main-title">支付管理</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-mobile-phone"></i>
-          <span slot="title" class="main-title">设备管理</span>
-        </el-menu-item>
-      </el-menu>
-    </el-aside>
+    <el-menu router :default-active="game" class="el-menu-vertical-demo" :collapse="false" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+      <el-menu-item index="game">
+        <i class="el-icon-location"></i>
+        <span slot="title" class="main-title">游戏管理</span>
+      </el-menu-item>
+      <el-menu-item index="user">
+        <i class="el-icon-document"></i>
+        <span slot="title" class="main-title">用户管理</span>
+      </el-menu-item>
+      <el-menu-item index="device">
+        <i class="el-icon-setting"></i>
+        <span slot="title" class="main-title">支付管理</span>
+      </el-menu-item>
+      <el-menu-item index="device">
+        <i class="el-icon-mobile-phone"></i>
+        <span slot="title" class="main-title">设备管理</span>
+      </el-menu-item>
+    </el-menu>
+  </el-aside>
 </template>
 
 <script>
@@ -42,7 +42,5 @@
   width: 200px;
 }
 
-.main-side {
-
-}
+.main-side {}
 </style>
