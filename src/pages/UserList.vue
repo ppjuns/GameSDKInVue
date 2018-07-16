@@ -15,9 +15,9 @@
             </el-table-column>
             <el-table-column prop="userName" label="用户名" width="150">
             </el-table-column>
-            <el-table-column prop="userImg" label="头像" width="125">
+            <el-table-column prop="userImg" label="头像" align="center" width="75">
                    <template slot-scope="scope">
-            <img :src="scope.row.userImg"/>
+            <img class="user-img" :src="scope.row.userImg"/>
         </template>
             </el-table-column>
             <el-table-column prop="userToken" label="token" width="300">
@@ -43,6 +43,8 @@ export default {
             tableData:[],
             gameName: '全部游戏',
             gameId: 0,
+            isLoading:false,
+            items:[],
             userToken: window.localStorage.getItem('userToken')
         }
     },
@@ -102,6 +104,10 @@ export default {
 .table {
     width: 100%;
     margin-top: 10px;
+}
+.user-img{
+    width:50px;
+    height: 50px;
 }
 </style>
 

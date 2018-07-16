@@ -10,6 +10,8 @@ import NotFound from '@/pages/NotFound'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',  // 将模式转换成history
+  base: '/sdk/', 
   routes: [
     {
       path:'/home',
