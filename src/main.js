@@ -10,8 +10,8 @@ import VueAxios from 'vue-axios'
 import Qs from 'qs'
 
 var axiosInstance = axios.create({
-  baseURL: location.protocol + '//119.29.233.121:8080/game-0.0.1-SNAPSHOT/',
- // baseURL: location.protocol + '//127.0.0.1:8081/',
+ // baseURL: location.protocol + '//119.29.233.121:8080/game-0.0.1-SNAPSHOT/',
+  baseURL: location.protocol + '//127.0.0.1:8081/',
   transformRequest: function (data) {
     return Qs.stringify(data)
   },

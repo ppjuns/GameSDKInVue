@@ -10,15 +10,15 @@
             </el-dropdown-menu>
         </el-dropdown>
 
-        <el-table v-loading="isLoading" border :data="tableData" height="700" class="table">
+        <el-table v-loading="isLoading" border :data="tableData" height="770" class="table">
             <el-table-column prop="uid" label="id" width="100">
             </el-table-column>
             <el-table-column prop="userName" label="用户名" width="150">
             </el-table-column>
             <el-table-column prop="userImg" label="头像" align="center" width="75">
-                   <template slot-scope="scope">
-            <img class="user-img" :src="scope.row.userImg"/>
-        </template>
+                <template slot-scope="scope">
+                    <img class="user-img" :src="scope.row.userImg" />
+                </template>
             </el-table-column>
             <el-table-column prop="userToken" label="token" width="300">
             </el-table-column>
@@ -33,6 +33,7 @@
             <el-table-column prop="createTime" label="创建时间" width="250">
             </el-table-column>
         </el-table>
+    <el-pagination class="pagination" background layout="prev, pager, next" :page-size="10" @current-change="handleCurrentChange"  :current-page="currentPage" :total="allPage"/>
     </div>
 </template>
 
@@ -40,64 +41,79 @@
 export default {
     data() {
         return {
-            tableData:[],
-            gameName: '全部游戏',
+            tableData: [],
+            gameName: "全部游戏",
             gameId: 0,
-            isLoading:false,
-            items:[],
-            userToken: window.localStorage.getItem('userToken')
-        }
+            isLoading: false,
+            items: [],
+            userToken: window.localStorage.getItem("userToken"),
+            currentPage: 1,
+            allPage: 1
+        };
     },
     mounted() {
-            this.getGameName()
+        this.getGameName();
     },
     methods: {
+        emptyFlag:function(){
+            return this.tableData.length==0?true:false;
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val;
+            this.getGameById();
+        },
         getGameName: function() {
-            this.isLoading = true
-            console.log(this.$route.params.userToken)
-            var data = []
-            this.axios.post('/game/all', {
-                'user_token': window.localStorage.getItem('userToken')
-            })
+            this.isLoading = true;
+            console.log(this.$route.params.userToken);
+            var data = [];
+            this.axios
+                .post("/game/all", {
+                    user_token: window.localStorage.getItem("userToken")
+                })
                 .then(res => {
-                    this.isLoading = false
+                    this.isLoading = false;
                     if (res.data.code === 200) {
-                        console.log(res.data)
-                        this.items = res.data.data
+                        console.log(res.data);
+                        this.items = res.data.data;
                         if (res.data.data.length > 0) {
-                            this.setGameName(res.data.data[0].gameName, res.data.data[0].gid)
+                            this.setGameName(
+                                res.data.data[0].gameName,
+                                res.data.data[0].gid
+                            );
                         }
                     } else {
-                        console.log(res.data.msg)
+                        console.log(res.data.msg);
                     }
-                })
+                });
         },
         setGameName: function(name, gid) {
-            console.log(name)
-            this.gameName = name
-            this.gameId = gid
-            this.getGameById()
+            console.log(name);
+            this.gameName = name;
+            this.gameId = gid;
+            this.getGameById();
         },
         getGameById: function() {
-            this.isLoading = true
-            var data = []
-            this.axios.post('/user', {
-                'user_token': this.userToken,
-                'game_id': this.gameId
-            })
-                .then(res => {
-                
-                    this.isLoading = false
-                    if (res.data.code === 200) {
-                        console.log(res.data)
-                        this.tableData = res.data.data
-                    } else {
-                        console.log(res.data.msg)
-                    }
+            this.isLoading = true;
+            var data = [];
+            this.axios
+                .post("/user/page", {
+                    user_token: this.userToken,
+                    game_id: this.gameId,
+                    page: this.currentPage
                 })
+                .then(res => {
+                    this.isLoading = false;
+                    if (res.data.code === 200) {
+                        console.log(res.data);
+                        this.tableData = res.data.data.list;
+                        this.allPage = res.data.data.page * 10;
+                    } else {
+                        console.log(res.data.msg);
+                    }
+                });
         }
     }
-}
+};
 </script>
 
 <style scoped>
@@ -105,9 +121,12 @@ export default {
     width: 100%;
     margin-top: 10px;
 }
-.user-img{
-    width:50px;
-    height: 50px;
+.user-img {
+    width: 40px;
+    height: 40px;
+}
+.pagination {
+    margin-top: 20px;
 }
 </style>
 
