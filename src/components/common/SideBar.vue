@@ -9,7 +9,7 @@
         <i class="el-icon-document"></i>
         <span slot="title" class="main-title">用户管理</span>
       </el-menu-item>
-      <el-menu-item index="/device">
+      <el-menu-item index="/pay">
         <i class="el-icon-setting"></i>
         <span slot="title" class="main-title">支付管理</span>
       </el-menu-item>

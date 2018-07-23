@@ -1,4 +1,5 @@
 <template>
+
     <div>
         <el-dropdown>
             <el-button type="primary">
@@ -10,31 +11,30 @@
             </el-dropdown-menu>
         </el-dropdown>
 
-        <el-table v-loading="isLoading" border :data="tableData" height="770" class="table">
-            <el-table-column prop="uid" label="id" width="100">
+        <el-table v-loading="isLoading" border :data="tableData" height="980" class="table">
+            <el-table-column prop="pid" label="id" width="100">
             </el-table-column>
-            <el-table-column prop="userName" label="用户名" width="150">
+            <el-table-column prop="productName" label="商品名" width="150">
             </el-table-column>
-            <el-table-column prop="userImg" label="头像" align="center" width="75">
-                <template slot-scope="scope">
-                    <img class="user-img" :src="scope.row.userImg" />
-                </template>
+            <el-table-column prop="productPrice" label="商品价格（元）" width="150" />
+            <el-table-column prop="gameOrderNo" label="游戏内订单号" width="150" />
+            <el-table-column prop="payStatus" label="支付状态" :formatter="setColumnPayStatus" align="center" width="100">
+
             </el-table-column>
-            <el-table-column prop="userToken" label="token" width="300">
+            <el-table-column prop="payWay" label="支付方式 " align="center" width="100">
             </el-table-column>
-            <el-table-column prop="userLevel" label="等级" width="100">
+            <el-table-column prop="payTime" label="支付时间 " width="150">
             </el-table-column>
-            <el-table-column prop="userSex" label="性别" width="100">
+            <el-table-column prop="userId" label="用户id " width="100 ">
             </el-table-column>
-            <el-table-column prop="userOpenId" label="openId" width="300">
+            <el-table-column prop="payTradeNo" label="预订单 " width="300 ">
             </el-table-column>
-            <el-table-column prop="platform" label="平台" width="100">
-            </el-table-column>
-            <el-table-column prop="createTime" label="创建时间" width="250">
+            <el-table-column prop="createTime" label="创建时间 " width="250 ">
             </el-table-column>
         </el-table>
-    <el-pagination class="pagination" background layout="prev, pager, next" :page-size="10" @current-change="handleCurrentChange"  :current-page="currentPage" :total="allPage"/>
+        <el-pagination class="pagination " background layout="prev, pager, next " :page-size="10 " @current-change="handleCurrentChange " :current-page="currentPage " :total="allPage " />
     </div>
+
 </template>
 
 <script>
@@ -55,9 +55,16 @@ export default {
         this.getGameName();
     },
     methods: {
+        setColumnPayStatus: function(row, column) {
+            console.log(row[column.property]);
+            if (row[column.property] === "0") {
+                return "未支付";
+            }
+            return "已支付";
+        },
         handleCurrentChange(val) {
             this.currentPage = val;
-            this.getGameById();
+            this.getPayById();
         },
         getGameName: function() {
             this.isLoading = true;
@@ -87,13 +94,13 @@ export default {
             console.log(name);
             this.gameName = name;
             this.gameId = gid;
-            this.getGameById();
+            this.getPayById();
         },
-        getGameById: function() {
+        getPayById: function() {
             this.isLoading = true;
             var data = [];
             this.axios
-                .post("/user/page", {
+                .post("/pay/page", {
                     user_token: this.userToken,
                     game_id: this.gameId,
                     page: this.currentPage
@@ -112,18 +119,13 @@ export default {
     }
 };
 </script>
-
-<style scoped>
+<style>
 .table {
     width: 100%;
     margin-top: 10px;
 }
-.user-img {
-    width: 40px;
-    height: 40px;
-}
+
 .pagination {
     margin-top: 20px;
 }
 </style>
-
