@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-div">
-      <h3> 很厉害的 SDK 后台登录</h3>
+      <h3> SDK 后台登录</h3>
       <p class="login-text"> 用户名：</p>
       <el-input prefix-icon="el-icon-tickets" placeholder="请输入用户名" type="text" v-model="inputUsername" clearable>
       </el-input>

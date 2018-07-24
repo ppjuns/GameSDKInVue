@@ -23,7 +23,7 @@
             </el-table-column>
             <el-table-column prop="payWay" label="支付方式 " align="center" width="100">
             </el-table-column>
-            <el-table-column prop="payTime" label="支付时间 " width="150">
+            <el-table-column prop="payTime" label="支付时间 " width="180">
             </el-table-column>
             <el-table-column prop="userId" label="用户id " width="100 ">
             </el-table-column>
