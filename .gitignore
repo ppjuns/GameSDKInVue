@@ -26,3 +26,4 @@ hs_err_pid*
 node_modules
 test/e2e/reports
 test/e2e/screenshots
+dist
